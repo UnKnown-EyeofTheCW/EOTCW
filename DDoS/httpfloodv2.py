@@ -146,7 +146,7 @@ def main(target, proxyfile):
 
 if __name__ == "__main__":
     target = input(f"{B}Enter the target: ")
-    num_threads = int(input(f"{B}Amount of threads(1-1000): ")
+    num_threads = int(input(f"{B}Amount of threads(1-1000): "))
     proxyfile = input(f"{B}Enter the proxy file: ")
     if os.path.isfile(proxyfile):
         print(f"{G}[+]Success! proxy file is found!")
