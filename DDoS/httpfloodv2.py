@@ -1,8 +1,9 @@
-import request
+import requests
 import time
 import random
 import sys
 import threading
+import os
 
 headers_useragents = []
 R = '\033[31m' #Aggressive/Alert/Caution/Warning/Failed

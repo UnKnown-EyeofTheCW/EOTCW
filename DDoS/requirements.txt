@@ -1,9 +1,8 @@
 aiohttp
 asyncio
-os
 sys
 time
 getpass
 random
 threading
-request
+requests
