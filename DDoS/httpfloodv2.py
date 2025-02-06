@@ -156,5 +156,5 @@ if __name__ == "__main__":
         print(f"{R}[!]ERROR: 404 file not found!!!")
 
     for i in range(num_threads):
-        thread = threading.Thread(target=attack)
+        thread = threading.Thread(target=attack,args=(target, proxyfile,))
         thread.start()
