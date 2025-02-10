@@ -17,37 +17,74 @@ os.system('cls' if os.name == 'nt' else 'clear')
 
 if os.path.isfile(output_file):
     os.remove(output_file)
-    print(f"{Fore.RED}'proxy.txt' telah dihapus.{Fore.RESET}")
-
-print(f"{Fore.YELLOW}Otw Download\n")
 
 proxy_urls = [
-'https://api.proxyscrape.com/v2/?request=displayproxies',
-'https://raw.githubusercontent.com/officialputuid/KangProxy/KangProxy/http/http.txt',
-'https://raw.githubusercontent.com/roosterkid/openproxylist/main/HTTPS_RAW.txt',
-'https://raw.githubusercontent.com/yuceltoluyag/GoodProxy/main/raw.txt',
+'https://api.proxyscrape.com/v2/?request=getproxies&protocol=http&timeout=10000&country=all&ssl=all&anonymity=anonymous',
+'https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/http.txt',
 'https://raw.githubusercontent.com/ShiftyTR/Proxy-List/master/http.txt',
 'https://raw.githubusercontent.com/ShiftyTR/Proxy-List/master/https.txt',
-'https://raw.githubusercontent.com/mmpx12/proxy-list/master/https.txt',
+'https://raw.githubusercontent.com/MuRongPIG/Proxy-Master/main/socks5.txt',
+'https://api.proxyscrape.com/?request=displayproxies&proxytype=socks5',
+'https://api.proxyscrape.com/v2/?request=displayproxies&protocol=socks5',
+'https://api.proxyscrape.com/v2/?request=getproxies&protocol=socks5&timeout=10000&country=all&simplified=true',
+'https://www.proxyscan.io/download?type=http',
+'https://proxyspace.pro/socks5.txt',
 'https://proxyspace.pro/http.txt',
 'https://api.proxyscrape.com/?request=displayproxies&proxytype=http',
+'https://www.proxy-list.download/api/v1/get?type=http',
 'https://raw.githubusercontent.com/monosans/proxy-list/main/proxies/http.txt',
-'http://worm.rip/http.txt',
-'http://worm.rip/https.txt',
+'http://freeproxylist-daily.blogspot.com/2013/05/usa-proxy-list-2013-05-15-0111-am-gmt8.html',
+'http://freeproxylist-daily.blogspot.com/2013/05/usa-proxy-list-2013-05-13-812-gmt7.html',
+'http://vipprox.blogspot.com/2013_06_01_archive.html',
+'http://vipprox.blogspot.com/2013/05/us-proxy-servers-74_24.html',
+'http://vipprox.blogspot.com/p/blog-page_7.html',
+'http://vipprox.blogspot.com/2013/05/us-proxy-servers-199_20.html',
+'http://vipprox.blogspot.com/2013_02_01_archive.html',
 'http://alexa.lr2b.com/proxylist.txt',
-'https://api.openproxylist.xyz/http.txt',
-'http://rootjazz.com/proxies/proxies.txt',
-'https://multiproxy.org/txt_all/proxy.txt',
-'https://proxy-spider.com/api/proxies.example.txt',
-'https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/http.txt',
-'https://raw.githubusercontent.com/jetkai/proxy-list/main/online-proxies/txt/proxies.txt',
+'http://vipprox.blogspot.com/2013_03_01_archive.html',
+'http://browse.feedreader.com/c/Proxy_Server_List-1/449196251',
+'http://free-ssh.blogspot.com/feeds/posts/default',
+'http://browse.feedreader.com/c/Proxy_Server_List-1/449196259',
+'http://sockproxy.blogspot.com/2013/04/11-04-13-socks-45.html',
+'http://proxyfirenet.blogspot.com/',
+'https://www.javatpoint.com/proxy-server-list',
+'https://openproxy.space/list/http',
+'http://proxydb.net/',
+'http://olaf4snow.com/public/proxy.txt',
+'https://openproxy.space/list/socks4',
+'https://openproxy.space/list/socks5',
+'http://rammstein.narod.ru/proxy.html',
+'http://greenrain.bos.ru/R_Stuff/Proxy.htm',
+'http://inav.chat.ru/ftp/proxy.txt',
+'http://johnstudio0.tripod.com/index1.htm',
+'http://atomintersoft.com/transparent_proxy_list',
+'http://atomintersoft.com/anonymous_proxy_list',
+'http://atomintersoft.com/high_anonymity_elite_proxy_list',
+'http://atomintersoft.com/products/alive-proxy/proxy-list/3128',
+'http://atomintersoft.com/products/alive-proxy/proxy-list/com',
+'http://atomintersoft.com/products/alive-proxy/proxy-list/high-anonymity/',
+'http://atomintersoft.com/products/alive-proxy/socks5-list',
+'http://atomintersoft.com/proxy_list_domain_com',
+'http://atomintersoft.com/proxy_list_domain_edu',
+'http://atomintersoft.com/proxy_list_domain_net',
+'https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/socks4.txt',
+'https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/socks5.txt',
+'http://atomintersoft.com/proxy_list_domain_org',
+'http://atomintersoft.com/proxy_list_port_3128',
+'http://atomintersoft.com/proxy_list_port_80',
+'http://atomintersoft.com/proxy_list_port_8000',
+'http://atomintersoft.com/proxy_list_port_81',
+'http://hack-hack.chat.ru/proxy/allproxy.txt',
 'https://raw.githubusercontent.com/hookzof/socks5_list/master/proxy.txt',
-'https://raw.githubusercontent.com/clarketm/proxy-list/master/proxy-list-raw.txt',
+'http://hack-hack.chat.ru/proxy/anon.tx',
+'http://hack-hack.chat.ru/proxy/p1.txt',
+'http://hack-hack.chat.ru/proxy/p2.txt',
+'http://hack-hack.chat.ru/proxy/p3.txt',
+'http://hack-hack.chat.ru/proxy/p4.txt',
 'https://raw.githubusercontent.com/sunny9577/proxy-scraper/master/proxies.txt',
-'https://raw.githubusercontent.com/opsxcq/proxy-list/master/list.txt',
+'https://api.proxyscrape.com/?request=getproxies&proxytype=http&timeout=10000&country=all&ssl=all&anonymity=all',
+'https://api.proxyscrape.com/?request=getproxies&proxytype=https&timeout=10000&country=all&ssl=all&anonymity=all',
 'https://api.proxyscrape.com/v2/?request=getproxies&protocol=http&timeout=10000&country=all&ssl=all&anonymity=all',
-'https://www.proxydocker.com/en/proxylist/download?email=noshare&country=all&city=all&port=all&type=all&anonymity=all&state=all&need=all',
-'https://api.proxyscrape.com/v2/?request=getproxies&protocol=http&timeout=10000&country=all&ssl=all&anonymity=anonymous',
 ]
 
 def download_and_save_proxies(url, output_file):
@@ -56,11 +93,11 @@ def download_and_save_proxies(url, output_file):
         if response.status_code == 200:
             with open(output_file, 'a') as file:
                 file.write(response.text)
-                print(f"{Fore.GREEN}Collect {Fore.WHITE}{url} {Fore.GREEN}")
+                print(f"{Fore.WHITE}Successfully Collecting Proxy ({Fore.GREEN}Scraper By Root{Fore.GREEN})\nInfo: {url}")
         else:
-            print(f"{Fore.RED}Gagal {url}{Fore.RESET}")
+            print(f"{Fore.RED}Failed to Collecting Proxy {Fore.RED}\nInfo: {url}")
     except Exception as e:
-        print(f"{Fore.RED}Gagal {url}{Fore.RESET}")
+        print(f"{Fore.RED}Falid {url}{Fore.RESET}")
 
 open(output_file, 'w').close()
 
@@ -148,7 +185,7 @@ for url in proxy_urls:
 with open('proxy.txt', 'r') as ceki:
     jumlh = sum(1 for line in ceki)
     
-print(f"\n{Fore.WHITE}( {Fore.YELLOW}{jumlh} {Fore.WHITE}) {Fore.GREEN}Proxy Sudah Di Unduh, Mau Check? {Fore.WHITE}({Fore.GREEN}Y{Fore.WHITE}/{Fore.RED}N{Fore.WHITE}): ", end="")
+print(f"\nCongralutions You Got {Fore.WHITE}( {Fore.YELLOW}{jumlh} {Fore.WHITE}) Do u want check it ? {Fore.WHITE}({Fore.GREEN}Y{Fore.WHITE}/{Fore.RED}N{Fore.WHITE}): ", end="")
 choice = input().strip().lower()
 
 if choice == 'y' or choice == 'Y':
@@ -171,4 +208,4 @@ if choice == 'y' or choice == 'Y':
     check(file=output_file, timeout=args.timeout, method=args.proxy, site=args.site, verbose=args.verbose, random_user_agent=args.random_agent)
     sys.exit(0)
 else:
-    print(f"{Fore.YELLOW}Terima Kasih, Telah Menggunakan Script Saya!.\n")
+    print(f"{Fore.WHITE}Thank you and congratulations, the proxy scrape has been completed ")

